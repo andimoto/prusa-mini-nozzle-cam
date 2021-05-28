@@ -53,7 +53,7 @@ module miniCoolingFanHolder()
   hull() {
     translate([coolingFanNoseR,0,0])
       cube([coolingFanNoseR*2, coolingFanNoseR+holderWallThickness/2,coolingFanNoseLen]);
-    #translate([coolingFanNoseR*2,0,0])
+    translate([coolingFanNoseR*2,0,0])
       cube([coolingFanNoseR, coolingFanNoseR+holderWallThickness/2,coolingFanNoseLen*2]);
   }
 }
