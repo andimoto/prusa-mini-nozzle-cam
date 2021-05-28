@@ -5,11 +5,22 @@ camR = 4;
 camTubeR = 6;
 camTubeL = 60;
 
-holderWallThickness=2;
-coolingFanNoseR=7/2;
-coolingFanNoseLen=15;
+fanXY=40;
+fanZ=10;
+
+
+minkowR2=3;
+wallThickness=1;
+minkowR1=minkowR2+wallThickness;
+
+mountThickness=0.4;
+
+rotatorR=19;
 
 fanScrewR=1.7;
+
+armMoveX=20;
+armMoveY=0;
 
 
 module camTube()
@@ -23,41 +34,43 @@ module camTube()
 /* camTube(); */
 
 
-module miniCoolingFanHolder()
+module miniFanHolder()
 {
-  difference() {
-
-    hull()
+  difference()
+  {
+    union()
     {
-      cylinder(r=coolingFanNoseR+holderWallThickness/2, h=coolingFanNoseLen+holderWallThickness*2);
-      cube([coolingFanNoseR*3-0.5, coolingFanNoseR+holderWallThickness/2,coolingFanNoseLen+holderWallThickness*2]);
-    }
+      translate([-fanXY/2+minkowR2,-fanXY/2+minkowR2,0])  //move zero to middle
+      difference()
+      {
+        union(){
+        hull(){
+          minkowski() {
+            cube([fanXY-minkowR1*2+wallThickness*2,fanXY-minkowR1*2+wallThickness*2,fanZ]);
+            cylinder(r=minkowR1,h=0.00000000000001);
+          }
+            translate([-armMoveX,armMoveY,0]) cylinder(r=minkowR1,h=fanZ);
+          }
+          translate([-armMoveX,armMoveY,0]) cylinder(r=minkowR1,h=fanZ*2);
+        }
 
 
-    translate([0,0,holderWallThickness])
-    hull()
-    {
-      cylinder(r=coolingFanNoseR, h=coolingFanNoseLen);
-      translate([-coolingFanNoseR,0,0]) cube([coolingFanNoseR*2,coolingFanNoseR*2,coolingFanNoseLen]);
+        translate([0,0,mountThickness])
+        minkowski() {
+          cube([fanXY-minkowR2*2,fanXY-minkowR2*2,fanZ]);
+          cylinder(r=minkowR2,h=0.00000000000001);
+        }
+      }
     }
-    translate([0,0,holderWallThickness])
-    rotate([0,0,15])
-    hull()
-    {
-      cylinder(r=coolingFanNoseR, h=coolingFanNoseLen);
-      translate([-coolingFanNoseR,0,0]) cube([coolingFanNoseR*2,coolingFanNoseR*2,coolingFanNoseLen]);
-    }
+    cylinder(r=rotatorR, h=fanZ);
 
-    cylinder(r=fanScrewR, h=coolingFanNoseLen+holderWallThickness*2);
+    translate([-fanXY/2+minkowR2,fanXY/2-minkowR2,0]) cylinder(r=fanScrewR, h=fanZ);
+    translate([-fanXY/2+minkowR2,-fanXY/2+minkowR2,0]) cylinder(r=fanScrewR, h=fanZ);
   }
-  hull() {
-    translate([coolingFanNoseR,0,0])
-      cube([coolingFanNoseR*2, coolingFanNoseR+holderWallThickness/2,coolingFanNoseLen]);
-    translate([coolingFanNoseR*2,0,0])
-      cube([coolingFanNoseR, coolingFanNoseR+holderWallThickness/2,coolingFanNoseLen*2]);
-  }
+
 }
-miniCoolingFanHolder();
+
+miniFanHolder();
 
 module nozzleCam()
 {
@@ -66,3 +79,10 @@ module nozzleCam()
 
 
 /* nozzleCam(); */
+
+
+/* difference() {
+  miniFanHolder();
+  #translate([-10,-25,0]) cube([50,50,10]);
+  #translate([-25,-25,0]) cube([50,25,10]);
+} */
