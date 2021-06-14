@@ -3,7 +3,7 @@ $fn=70;
 
 camR = 4;
 camTubeR = 6;
-camTubeL = 60;
+camTubeL = 30;
 
 fanXY=40;
 fanZ=10;
@@ -25,10 +25,11 @@ armMoveY=0;
 
 module camTube()
 {
+  translate([0,0,-10])
   difference() {
     cylinder(r=camTubeR,h=camTubeL,center=false);
     cylinder(r=camR,h=camTubeL,center=false);
-    translate([0,0,30]) rotate([0,90,-50]) cylinder(r=1.5,h=8,center=false);
+    translate([0,0,17]) rotate([0,90,50]) cylinder(r=1.5,h=8,center=false);
   }
 }
 /* camTube(); */
@@ -70,15 +71,25 @@ module miniFanHolder()
 
 }
 
-miniFanHolder();
+/* miniFanHolder(); */
+
+
 
 module nozzleCam()
 {
-
+  difference(){
+    translate([4.2,-1,0]) cube([8,2,8]);
+    translate([9,0,4]) rotate([90,0,0]) cylinder(r=4.2/2,h=2, center=true);
+  }
+  difference() {
+    rotate([-20,0,0]) camTube();
+    translate([-10,-10,10]) cube([20,40,20]);
+    translate([-10,-10,-20]) cube([20,40,20]);
+  }
 }
 
 
-/* nozzleCam(); */
+nozzleCam();
 
 
 /* difference() {
