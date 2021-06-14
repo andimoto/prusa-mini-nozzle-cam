@@ -78,13 +78,16 @@ module miniFanHolder()
 module nozzleCam()
 {
   difference(){
-    translate([4.2,-1,0]) cube([8,2,8]);
-    translate([9,0,4]) rotate([90,0,0]) cylinder(r=4.2/2,h=2, center=true);
-  }
-  difference() {
-    rotate([-20,0,0]) camTube();
-    translate([-10,-10,10]) cube([20,40,20]);
-    translate([-10,-10,-20]) cube([20,40,20]);
+    union()
+    {
+      translate([0,2,0]) rotate([80,0,0]) camTube();
+      translate([-12,3,0]) cube([2,10,8]);
+      translate([-12,0,0]) cube([7,3,4]);
+    }
+    translate([-11,6.5,4]) rotate([90,0,90]) cylinder(r=4.2/2,h=2, center=true);
+
+    translate([-12,10,-10]) cube([20,20,20]);
+    translate([-10,-10,-25]) cube([20,40,20]);
   }
 }
 
