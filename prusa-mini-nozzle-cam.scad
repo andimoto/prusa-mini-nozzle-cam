@@ -1,5 +1,6 @@
 $fn=70;
 
+extra = 1;
 
 camR = 4;
 camTubeR = 6;
@@ -19,20 +20,9 @@ rotatorR=19;
 
 fanScrewR=1.7;
 
-armMoveX=20;
+armMoveX=30;
 armMoveY=0;
 
-
-module camTube()
-{
-  translate([0,0,-10])
-  difference() {
-    cylinder(r=camTubeR,h=camTubeL,center=false);
-    cylinder(r=camR,h=camTubeL,center=false);
-    translate([0,0,17]) rotate([0,90,50]) cylinder(r=1.5,h=8,center=false);
-  }
-}
-/* camTube(); */
 
 
 module miniFanHolder()
@@ -45,17 +35,23 @@ module miniFanHolder()
       difference()
       {
         union(){
-        hull(){
-          minkowski() {
-            cube([fanXY-minkowR1*2+wallThickness*2,fanXY-minkowR1*2+wallThickness*2,fanZ]);
-            cylinder(r=minkowR1,h=0.00000000000001);
-          }
+          /* top triangle */
+          topHolder();
+
+          /* complete case */
+          hull(){
+            minkowski() {
+              cube([fanXY-minkowR1*2+wallThickness*2,fanXY-minkowR1*2+wallThickness*2,fanZ]);
+              cylinder(r=minkowR1,h=0.00000000000001);
+            }
+            /* outer cylinder for front triangle */
             translate([-armMoveX,armMoveY,0]) cylinder(r=minkowR1,h=fanZ);
           }
-          translate([-armMoveX,armMoveY,0]) cylinder(r=minkowR1,h=fanZ*2);
+
+        /* translate([-armMoveX,armMoveY,0]) cylinder(r=minkowR1,h=fanZ); */
         }
 
-
+        /* fan case cutout */
         translate([0,0,mountThickness])
         minkowski() {
           cube([fanXY-minkowR2*2,fanXY-minkowR2*2,fanZ]);
@@ -63,40 +59,66 @@ module miniFanHolder()
         }
       }
     }
+    /* cutout for tube camera */
+    translate([-51,-10,fanZ+fanZ/2])
+    rotate([0,90,-28])
+    cylinder(r=camR,h=camTubeL,center=false);
+
+    /* screw for fixing tubeCamera */
+    translate([-49,-23,fanZ+fanZ/2])
+    rotate([0,90,90-28])
+    cylinder(r=1.5,h=12,center=false);
+
+    /* fan rotor cutout */
     cylinder(r=rotatorR, h=fanZ);
 
+    /* fan screws */
     translate([-fanXY/2+minkowR2,fanXY/2-minkowR2,0]) cylinder(r=fanScrewR, h=fanZ);
     translate([-fanXY/2+minkowR2,-fanXY/2+minkowR2,0]) cylinder(r=fanScrewR, h=fanZ);
+
+    /* fan cap cutoff */
+    translate([7-(fanXY+wallThickness*2)/2,-(fanXY+wallThickness*2)/2,-extra])
+    cube([fanXY+wallThickness*2,
+                                  fanXY+wallThickness*2,
+                                  fanZ+extra*2]);
+
+    /* cutout triangle */
+    hull()
+    {
+      translate([-42,-15,-extra]) cylinder(r=minkowR1-2,h=fanZ*2+extra*2);
+      translate([-26,-15,-extra]) cylinder(r=minkowR1-2,h=fanZ*2+extra*2);
+      translate([-26, 3, -extra]) cylinder(r=minkowR1-2,h=fanZ*2+extra*2);
+    }
+
+    for(i = [0 : 1 : 3])
+    {
+      translate([0,12,fanZ/2])
+      translate([-60,-8*i,0]) rotate([0,90,0]) cylinder(r=2,h=50,$fn = 6);
+    }
+
+    for(i = [0 : 1 : 1])
+    {
+      translate([0,4,fanZ+fanZ/2])
+      translate([-42.5,-8*i,0]) rotate([0,90,0]) cylinder(r=2,h=30,$fn = 6);
+    }
+    translate([-30,4-8*2,fanZ+fanZ/2]) rotate([0,90,0]) cylinder(r=2,h=20,$fn = 6);
   }
 
 }
 
 /* miniFanHolder(); */
 
-
-
-module nozzleCam()
+module topHolder()
 {
-  difference(){
-    union()
-    {
-      translate([0,2,0]) rotate([80,0,0]) camTube();
-      translate([-12,3,0]) cube([2,10,8]);
-      translate([-12,0,0]) cube([7,3,4]);
-    }
-    translate([-11,6.5,4]) rotate([90,0,90]) cylinder(r=4.2/2,h=2, center=true);
-
-    translate([-12,10,-10]) cube([20,20,20]);
-    translate([-10,-10,-25]) cube([20,40,20]);
+  hull()
+  {
+    translate([-armMoveX,-armMoveY,0]) cylinder(r=minkowR1,h=fanZ*2);
+    translate([-armMoveX+22,-armMoveY,0]) cylinder(r=minkowR1,h=fanZ*2);
+    translate([-armMoveX+22,-armMoveY+25, 0]) cylinder(r=minkowR1,h=fanZ*2);
   }
 }
 
 
-nozzleCam();
 
-
-/* difference() {
-  miniFanHolder();
-  #translate([-10,-25,0]) cube([50,50,10]);
-  #translate([-25,-25,0]) cube([50,25,10]);
-} */
+/* nozzleCam(); */
+miniFanHolder();

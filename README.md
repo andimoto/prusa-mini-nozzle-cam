@@ -1,5 +1,12 @@
 # Prusa Mini 8mm Nozzle Cam Mount
 
+__!!!!WORK IN PROGRESS!!!!__
+
+
+This is a easy printable nozzle camera holder for Prusa Mini.
+
+![](prusa-mini-nozzle-cam.png)
+
 
 # LICENSE
 
