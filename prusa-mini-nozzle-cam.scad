@@ -18,7 +18,7 @@ mountThickness=0.4;
 
 rotatorR=19;
 
-fanScrewR=1.7;
+fanScrewR=2.5;
 
 armMoveX=30;
 armMoveY=0;
@@ -31,6 +31,7 @@ module miniFanHolder()
   {
     union()
     {
+
       translate([-fanXY/2+minkowR2,-fanXY/2+minkowR2,0])  //move zero to middle
       difference()
       {
@@ -63,7 +64,10 @@ module miniFanHolder()
           cylinder(r=minkowR2,h=0.00000000000001);
         }
       }
+      translate([-10,fanXY/2,2]) snapCone();
     }
+
+
     /* cutout for tube camera */
     translate([-51,-22,fanZ+heatBreakZ/2])
     rotate([0,90,-20])
@@ -78,14 +82,19 @@ module miniFanHolder()
     cylinder(r=rotatorR, h=fanZ);
 
     /* fan screws */
-    translate([-fanXY/2+minkowR2,fanXY/2-minkowR2,0]) cylinder(r=fanScrewR, h=fanZ);
-    translate([-fanXY/2+minkowR2,-fanXY/2+minkowR2,0]) cylinder(r=fanScrewR, h=fanZ);
+    /* translate([-fanXY/2+minkowR2+0.5,fanXY/2-minkowR2-0.5,0]) cylinder(r=fanScrewR, h=fanZ); */
+
+    translate([-fanXY/2+minkowR2+0.5,-fanXY/2+minkowR2+0.5,0]) cylinder(r=fanScrewR, h=fanZ);
+
 
     /* fan cap cutoff */
-    translate([7-(fanXY+wallThickness*2)/2,-(fanXY+wallThickness*2)/2,-extra])
-    cube([fanXY+wallThickness*2,
-                                  fanXY+wallThickness*2,
-                                  fanZ+extra*2]);
+    translate([9-(fanXY+wallThickness*2)/2,-(fanXY+wallThickness*2)/2-8,-extra])
+    cube([fanXY+wallThickness*2, fanXY+wallThickness*2, fanZ+extra*2]);
+    /* fan cap cutoff */
+    translate([8-(fanXY+wallThickness*2)/2+5,-(fanXY+wallThickness*2)/2,-extra])
+    cube([fanXY+wallThickness*2, fanXY+wallThickness*2, fanZ+extra*2]);
+
+
 
     /* cutout triangle */
     hull()
@@ -115,6 +124,21 @@ module miniFanHolder()
 
 }
 
+/* snapCone(); */
+module snapCone()
+{
+  difference()
+  {
+    union()
+    {
+      cylinder(r1=0.00001,r2=2,h=2);
+      translate([0,0,2]) cylinder(r=2,h=4);
+    }
+    translate([-2.5,0,0]) cube([5,5,10]);
+  }
+}
+
+
 /* miniFanHolder(); */
 
 module topHolder()
@@ -122,8 +146,8 @@ module topHolder()
   hull()
   {
     translate([-armMoveX,-armMoveY-11.5,0]) cylinder(r=minkowR1,h=fanZ+heatBreakZ);
-    translate([-armMoveX+22,-armMoveY-3.07,0]) cylinder(r=minkowR1,h=fanZ+heatBreakZ);
-    translate([-armMoveX+22,-armMoveY+22.27, 0]) cylinder(r=minkowR1,h=fanZ+heatBreakZ);
+    translate([-armMoveX+22.26,-armMoveY-2.97,0]) cylinder(r=minkowR1,h=fanZ+heatBreakZ);
+    translate([-armMoveX+22.26,-armMoveY+22.27, 0]) cylinder(r=minkowR1,h=fanZ+heatBreakZ);
   }
 }
 
