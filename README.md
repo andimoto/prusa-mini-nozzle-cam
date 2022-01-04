@@ -33,12 +33,9 @@ Parts needed:
 
 # Video
 
-[NozzleCam 001](https://i.imgur.com/PkKVFWg.mp4)
+<a href="https://imgur.com/nMllFgK.mp4"><img src="https://i.imgur.com/nMllFgK.jpg" title="source: imgur.com" /></a>
 
-<a href="https://imgur.com/nMllFgK"><img src="https://i.imgur.com/nMllFgK.mp4" title="source: imgur.com" /></a>
-
-
-<a href="https://imgur.com/nMllFgK" title="Link Title"><img src="https://imgur.com/nMllFgK" alt="NozzleCam Prusa Mini" /></a>
+<a href="https://i.imgur.com/PkKVFWg.mp4" title="Link Title"><img src="https://i.imgur.com/PkKVFWg.jpg" alt="NozzleCam Prusa Mini" /></a>
 
 
 # LICENSE
