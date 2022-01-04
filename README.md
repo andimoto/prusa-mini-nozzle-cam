@@ -29,13 +29,15 @@ Parts needed:
 
 ![](img/DSC01688.JPG)
 
+<br>
+<br>
+<br>
 
+# __Videos__
 
-# Video
+<a href="https://imgur.com/nMllFgK.mp4"><img src="https://i.imgur.com/nMllFgK.jpg" title="Imgur: Prusa Mini NozzleCam" alt="NozzleCam Prusa Mini" /></a>
 
-<a href="https://imgur.com/nMllFgK.mp4"><img src="https://i.imgur.com/nMllFgK.jpg" title="source: imgur.com" /></a>
-
-<a href="https://i.imgur.com/PkKVFWg.mp4" title="Link Title"><img src="https://i.imgur.com/PkKVFWg.jpg" alt="NozzleCam Prusa Mini" /></a>
+<a href="https://i.imgur.com/PkKVFWg.mp4" title="Imgur: Prusa Mini NozzleCam"><img src="https://i.imgur.com/PkKVFWg.jpg" alt="NozzleCam Prusa Mini" /></a>
 
 
 # LICENSE
