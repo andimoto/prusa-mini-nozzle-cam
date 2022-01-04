@@ -1,11 +1,44 @@
-# Prusa Mini 8mm Nozzle Cam Mount
+# Prusa Mini Nozzle Cam Mount
 
-__!!!!WORK IN PROGRESS!!!!__
+__Version 1__
 
 
 This is a easy printable nozzle camera holder for Prusa Mini.
 
-![](prusa-mini-nozzle-cam.png)
+Parts needed:
+- this Prusa Mini(+) Nozzle Camera Holder
+- M3 screw (M3x4 or something like that, I used one without a head and with a hex insert)
+- USB Endoscope Camera (M5, M6, M7, M8, M9, M10)
+
+![](img/prusa-mini-nozzle-cam.png)
+
+
+![](img/DSC01674.JPG)
+
+![](img/DSC01677.JPG)
+
+![](img/DSC01681.JPG)
+
+![](img/DSC01684.JPG)
+
+![](img/DSC01685.JPG)
+
+![](img/DSC01686.JPG)
+
+![](img/DSC01687.JPG)
+
+![](img/DSC01688.JPG)
+
+
+
+# Video
+
+[NozzleCam 001](https://i.imgur.com/PkKVFWg.mp4)
+
+<a href="https://imgur.com/nMllFgK"><img src="https://i.imgur.com/nMllFgK.mp4" title="source: imgur.com" /></a>
+
+
+<a href="https://imgur.com/nMllFgK" title="Link Title"><img src="https://imgur.com/nMllFgK" alt="NozzleCam Prusa Mini" /></a>
 
 
 # LICENSE

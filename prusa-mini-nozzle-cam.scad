@@ -2,7 +2,7 @@ $fn=70;
 
 extra = 1;
 
-camR = 4;
+camR = 4.1;
 camTubeR = 6;
 camTubeL = 30;
 
